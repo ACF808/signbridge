@@ -2,6 +2,7 @@ import {useState} from "react";
 import {ArrowRight, ArrowLeft, BookOpen, Camera, Sparkles} from "lucide-react";
 import Blob from "./components/Blob";
 import "./App.css";
+import HandTracker from "./components/HandTracker";
 
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
@@ -118,7 +119,7 @@ export default function App() {
         </main>
 
       ) : (
-        <main className="practice-page">
+        <main className="practise-page">
           <button
             className="back-button"
             onClick={() => setPage("home")}
@@ -127,24 +128,17 @@ export default function App() {
             back home
           </button>
 
-          <div className="practice-heading">
-            <span className="eyebrow">✦ practice time!</span>
+          <div className="practise-heading">
+            <span className="eyebrow">✦ practise time!</span>
             <h1>show me your signs!</h1>
             <p>
               Pick a letter and let's get practising.
             </p>
           </div>
 
-          <div className="practice-grid">
+          <div className="practise-grid">
             <div className="camera-card">
-              <div className="camera-placeholder">
-                <Camera size={48} />
-                <h3>camera coming soon!</h3>
-                <p>
-                  We'll add live hand tracking in
-                  our next update.
-                </p>
-              </div>
+              <HandTracker />
             </div>
 
             <div className="letter-card">
