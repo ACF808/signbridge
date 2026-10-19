@@ -750,3 +750,64 @@
     align-items: stretch;
   }
 }
+
+
+/* ===== TRAINING DATA COLLECTOR ===== */
+
+.data-collector {
+  margin-top: 25px;
+  padding: 25px;
+  border-radius: 20px;
+  background: #f7f1ff;
+  border: 2px solid #e4d5f5;
+}
+
+.data-collector h3 {
+  font-family: "Nunito", sans-serif;
+  margin-top: 0;
+  color: #8b75ce;
+}
+
+.data-collector p {
+  color: #756c7f;
+  line-height: 1.6;
+}
+
+.collector-letters {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.collector-letters button {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #d9c9ee;
+  border-radius: 12px;
+  background: white;
+  color: #39344c;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.collector-letters button.active {
+  background: #8b75ce;
+  color: white;
+  border-color: #8b75ce;
+}
+
+.data-collector > button {
+  margin: 5px 10px 5px 0;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 12px;
+  background: #8b75ce;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.data-collector > button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
