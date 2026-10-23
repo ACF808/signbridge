@@ -1,27 +1,45 @@
-import {useState} from "react";
-import {ArrowRight, ArrowLeft, BookOpen, Camera, Sparkles} from "lucide-react";
-import Blob from "./components/Blob";
-import "./App.css";
+
+import { useState } from "react";
+import { ArrowRight, ArrowLeft, BookOpen, Sparkles } from "lucide-react";
+import CustomBlob from "./components/CustomBlob";
 import HandTracker from "./components/HandTracker";
+import BlobCustomiser from "./components/BlobCustomiser";
+import "./App.css";
 
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 export default function App() {
   const [page, setPage] = useState("home");
-  const [selectedLetter,setSelectedLetter] =useState("A");
+  const [selectedLetter, setSelectedLetter] = useState("A");
 
-  return(
+  return (
     <div className="app">
+      {/* NAVIGATION */}
       <header className="navbar">
         <button
           className="logo"
           onClick={() => setPage("home")}
         >
-          <span className="logo-star">*</span> signbridge
+          <span className="logo-star">✦</span> signbridge
         </button>
 
         <div className="nav-right">
-          <span className="nav-label">little signs, big connections ♡</span>
+          <span className="nav-label">
+            little signs, big connections ♡
+          </span>
+
+          <button
+            type="button"
+            className="nav-customise"
+            onClick={() => {
+              console.log("Customise button clicked!");
+              setPage("customise");
+            }}
+          >
+  <Sparkles size={17} />
+  customise blob
+</button>
+
           <button
             className="nav-practise"
             onClick={() => setPage("practise")}
@@ -32,7 +50,8 @@ export default function App() {
         </div>
       </header>
 
-      {page==="home" ? (
+      {/* HOME PAGE */}
+      {page === "home" && (
         <main className="home">
           <section className="hero">
             <div className="hero-content">
@@ -41,16 +60,17 @@ export default function App() {
                 your signing journey starts here!
               </div>
 
-                <h1>
+              <h1>
                 little signs,
-                <br/>
+                <br />
                 <span>big connections.</span>
               </h1>
 
               <p className="hero-desription">
-                Learning ASL fingerspelling doesn't have to be intimidating!
-                Practise letters, learn at your own pace, and make a new
-                little friend along the way.
+                Learning ASL fingerspelling doesn't have to be
+                intimidating! Practise letters, learn at your
+                own pace, and make a new little friend along
+                the way.
               </p>
 
               <button
@@ -68,22 +88,27 @@ export default function App() {
 
             <div className="hero-art">
               <div className="mascot-bacground">
-                <span className="decoration decoration-one">*</span>
-                <span className="decoration decoration-two">*</span>
-                <span className="decoration decoration-three">*</span>
+                <span className="decoration decoration-one">
+                  ✦
+                </span>
+                <span className="decoration decoration-two">
+                  ✦
+                </span>
+                <span className="decoration decoration-three">
+                  ✦
+                </span>
 
-                <Blob />
+                <CustomBlob />
 
-                <div className="speech-bubble">
-                hi friend! ♡
-                </div>"
               </div>
             </div>
           </section>
 
           <section className="features">
             <div className="section-heading">
-              <span className="eyebrow">✦ how it works</span>
+              <span className="eyebrow">
+                ✦ how it works
+              </span>
               <h2>small steps, big progress!</h2>
             </div>
 
@@ -117,8 +142,10 @@ export default function App() {
             </div>
           </section>
         </main>
+      )}
 
-      ) : (
+      {/* PRACTISE PAGE */}
+      {page === "practise" && (
         <main className="practise-page">
           <button
             className="back-button"
@@ -129,8 +156,12 @@ export default function App() {
           </button>
 
           <div className="practise-heading">
-            <span className="eyebrow">✦ practise time!</span>
+            <span className="eyebrow">
+              ✦ practise time!
+            </span>
+
             <h1>show me your signs!</h1>
+
             <p>
               Pick a letter and let's get practising.
             </p>
@@ -160,7 +191,9 @@ export default function App() {
                         ? "letter-button active"
                         : "letter-button"
                     }
-                    onClick={() => setSelectedLetter(letter)}
+                    onClick={() =>
+                      setSelectedLetter(letter)
+                    }
                   >
                     {letter}
                   </button>
@@ -175,6 +208,22 @@ export default function App() {
         </main>
       )}
 
+      {/* CUSTOMISATION PAGE */}
+      {page === "customise" && (
+        <main className="customise-page">
+          <button
+            className="back-button"
+            onClick={() => setPage("home")}
+          >
+            <ArrowLeft size={18} />
+            back home
+          </button>
+
+          <BlobCustomiser />
+        </main>
+      )}
+
+      {/* FOOTER */}
       <footer className="footer">
         made with ♡ and a little bit of magic
       </footer>
