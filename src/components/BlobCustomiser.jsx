@@ -1,20 +1,9 @@
-import { useState } from "react";
 import CustomBlob from "./CustomBlob";
+import { useEffect, useState } from "react";
+import { ACCESSORIES, getShop, SHOP_EVENT } from "../data/shop";
 
 const EYE_COUNT = 10;
 const MOUTH_COUNT = 10;
-
-const ACCESSORIES = [
-    { id: "none", name: "None", price: 0},
-    { id: "party-hat", name: "Party Hat", price: 100 },
-    { id: "angry-mark", name: "Angry Mark", price: 75 },
-    {
-        id: "sprout",
-        name: "Sprout",
-        price: null,
-        challenge: "Outside Challenge",
-    },
-];
 
 const DEFAULT_BLOB = {
     eyes: 1,
@@ -43,8 +32,23 @@ export default function BlobCustomiser() {
     const [blob, setBlob] = useState(loadSavedBlob);
     const [saved, setSaved] = useState(true);
 
-    //temp inventory here REMEMBER TO REPLACE LATER
-    const [unlockedAccessories] = useState(["none"]);
+    const [unlockedAccessories, setUnlockedAccessories] = useState(
+        () => getShop().unlockedAccessories
+    );
+
+    useEffect(() => {
+        function refreshInventory() {
+            setUnlockedAccessories(getShop().unlockedAccessories);
+        }
+
+        window.addEventListener(SHOP_EVENT, refreshInventory);
+        window.addEventListener("storage", refreshInventory);
+
+        return () => {
+            window.removeEventListener(SHOP_EVENT, refreshInventory);
+            window.removeEventListener("storage", refreshInventory);
+        }
+    }, []);
 
     function updateBlob(key, value) {
         setBlob((previous) => ({
@@ -81,7 +85,7 @@ export default function BlobCustomiser() {
         );
 
         window.dispatchEvent(
-            new Event("signbridge-blob-update")
+            new Event("signbridge-blob-updated")
         );
 
         setBlob(finalBlob);
@@ -224,7 +228,7 @@ export default function BlobCustomiser() {
 
                 {!isUnlocked && (
                     <p className="customiser-lock-message">
-                        this accessory is locked! you can preview it, 
+                        this accessory is locked! u can preview it, 
                         however u must unlock before u can equip it.
                     </p>
                 )}

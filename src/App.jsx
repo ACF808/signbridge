@@ -1,10 +1,11 @@
 
 import { useState } from "react";
-import { ArrowRight, ArrowLeft, BookOpen, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowLeft, BookOpen, Sparkles, ShoppingBag } from "lucide-react";
 import CustomBlob from "./components/CustomBlob";
 import HandTracker from "./components/HandTracker";
 import BlobCustomiser from "./components/BlobCustomiser";
 import "./App.css";
+import AccessoryShop from "./components/AccessoryShop";
 
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
@@ -36,9 +37,20 @@ export default function App() {
               setPage("customise");
             }}
           >
-  <Sparkles size={17} />
-  customise blob
-</button>
+            <Sparkles size={17} />
+            customise blob
+          </button>
+
+          <button
+            className="nav-customise"
+            onClick={() => {
+              console.log("Shop button clicked!");
+              setPage("shop");
+            }}
+          >
+            <ShoppingBag size={17} />
+            shop
+          </button>
 
           <button
             className="nav-practise"
@@ -220,6 +232,20 @@ export default function App() {
           </button>
 
           <BlobCustomiser />
+        </main>
+      )}
+
+      {/* SHOP PAGE */}
+      {page === "shop" && (
+        <main className="shop-page">
+          <button
+            onClick={() => setPage("home")}
+          >
+            <ArrowLeft size={18} />
+            back home
+          </button>
+
+          <AccessoryShop />
         </main>
       )}
 
